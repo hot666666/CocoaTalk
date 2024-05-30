@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct CocoaTalkApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject var container: DIContainer = .init(services: Services())
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AuthenticationView(vm: .init(container: container))
+                .environmentObject(container)
         }
     }
 }
