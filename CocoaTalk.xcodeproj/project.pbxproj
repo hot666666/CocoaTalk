@@ -11,6 +11,7 @@
 		45BF38C12C08465F000E1EA5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BF38C02C08465F000E1EA5 /* ContentView.swift */; };
 		45BF38C32C084661000E1EA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45BF38C22C084661000E1EA5 /* Assets.xcassets */; };
 		45BF38C62C084661000E1EA5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45BF38C52C084661000E1EA5 /* Preview Assets.xcassets */; };
+		45BF38CE2C0846F0000E1EA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BF38CD2C0846F0000E1EA5 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		45BF38C02C08465F000E1EA5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		45BF38C22C084661000E1EA5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		45BF38C52C084661000E1EA5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		45BF38CD2C0846F0000E1EA5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,20 +53,93 @@
 		45BF38BD2C08465F000E1EA5 /* CocoaTalk */ = {
 			isa = PBXGroup;
 			children = (
-				45BF38BE2C08465F000E1EA5 /* CocoaTalkApp.swift */,
-				45BF38C02C08465F000E1EA5 /* ContentView.swift */,
-				45BF38C22C084661000E1EA5 /* Assets.xcassets */,
-				45BF38C42C084661000E1EA5 /* Preview Content */,
+				45BF38D12C084875000E1EA5 /* General */,
+				45BF38CC2C0846E2000E1EA5 /* Application */,
+				45BF38CF2C084849000E1EA5 /* Dependency */,
+				45BF38D02C084858000E1EA5 /* Presentation */,
+				45BF38D52C0849B6000E1EA5 /* Data */,
+				45BF38D72C0849E9000E1EA5 /* Service */,
+				45BF38D22C0848A0000E1EA5 /* Util */,
+				45BF38C42C084661000E1EA5 /* Resource */,
 			);
 			path = CocoaTalk;
 			sourceTree = "<group>";
 		};
-		45BF38C42C084661000E1EA5 /* Preview Content */ = {
+		45BF38C42C084661000E1EA5 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				45BF38C22C084661000E1EA5 /* Assets.xcassets */,
 				45BF38C52C084661000E1EA5 /* Preview Assets.xcassets */,
 			);
-			path = "Preview Content";
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		45BF38CC2C0846E2000E1EA5 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				45BF38BE2C08465F000E1EA5 /* CocoaTalkApp.swift */,
+				45BF38CD2C0846F0000E1EA5 /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		45BF38CF2C084849000E1EA5 /* Dependency */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Dependency;
+			sourceTree = "<group>";
+		};
+		45BF38D02C084858000E1EA5 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				45BF38C02C08465F000E1EA5 /* ContentView.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		45BF38D12C084875000E1EA5 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				45BF38D42C0848D0000E1EA5 /* View */,
+				45BF38D32C0848C3000E1EA5 /* Extension */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+		45BF38D22C0848A0000E1EA5 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		45BF38D32C0848C3000E1EA5 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		45BF38D42C0848D0000E1EA5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		45BF38D52C0849B6000E1EA5 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		45BF38D72C0849E9000E1EA5 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45BF38CE2C0846F0000E1EA5 /* AppDelegate.swift in Sources */,
 				45BF38C12C08465F000E1EA5 /* ContentView.swift in Sources */,
 				45BF38BF2C08465F000E1EA5 /* CocoaTalkApp.swift in Sources */,
 			);
@@ -271,7 +347,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"CocoaTalk/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"CocoaTalk/Resource\"";
 				DEVELOPMENT_TEAM = 8PRWAG4355;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -300,7 +376,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"CocoaTalk/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"CocoaTalk/Resource\"";
 				DEVELOPMENT_TEAM = 8PRWAG4355;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
