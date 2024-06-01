@@ -14,7 +14,8 @@ struct AuthenticationView: View {
     var body: some View {
         switch vm.authenticationState {
         case .authenticated:
-            Text("인증됨")
+            MainTabView()
+                .environmentObject(vm)
         case .unauthenticated:
             LoginIntroView()
                 .environmentObject(vm)
