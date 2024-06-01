@@ -17,10 +17,12 @@ enum AuthenticationError: Error {
     case GIDSignInError
     case tokenError
     case firebaseAuthenticationError
+    case logoutError
 }
 
 protocol AuthenticationServiceType {
     func signInWithGoogle() async throws -> User
+    func logout() async throws
 }
 
 class AuthenticationService: AuthenticationServiceType {
@@ -57,6 +59,14 @@ class AuthenticationService: AuthenticationServiceType {
         
         return try await authenticateUserWithFirebase(credential: credential)
     }
+    
+    func logout() async throws {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            throw AuthenticationError.logoutError
+        }
+    }
 }
 
 extension AuthenticationService {
@@ -79,5 +89,9 @@ extension AuthenticationService {
 class StubAuthenticationService: AuthenticationServiceType {
     func signInWithGoogle() async throws -> User {
         return User(id: "", name: "")
+    }
+    
+    func logout() async throws {
+        
     }
 }
