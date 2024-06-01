@@ -32,6 +32,7 @@ struct LoginIntroView: View {
                         .bold()
                 })
                 .buttonStyle(LoginButtonStyle(textColor: .yellow))
+                
             }
             .navigationDestination(isPresented: $isPresented) {
                 LoginView()
@@ -71,11 +72,7 @@ struct LoginView: View {
         }
         .overlay {
             if vm.isLoading {
-                ZStack{
-                    Color.black.opacity(0.1)
-                    ProgressView()
-                }
-                .ignoresSafeArea()
+                LoadingView()
             }
         }
         .navigationBarBackButtonHidden()
