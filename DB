@@ -1,0 +1,44 @@
+User: {
+    userId: String,
+    name: String,  // 이름
+    profileURL: String,  // 프로필 주소
+    description: String  // 상태메시지
+}
+Users: [User]  // users/userId
+
+===
+Chat: {
+    userId: String,  // 보낸사람
+    content: String, // 메시지
+    photoURL: String, // 이미지
+    date: Date // 날짜
+}
+Chats: {
+    chatRoomId: [Chat]  // chats/chatRoomId
+}
+
+===
+ChatRoom: {
+    chatRoomId: String,
+    otherUserId: String, // 상대방 아이디
+    otherUserName: String, // 상대방 이름
+    lastMessage: Chat // 가장 최근 채팅
+}
+
+ChatRooms: [ChatRoom]  // chatRooms/uesrId
+ChatRoom: {
+    userId: {
+        otherUserId: ChatRoom
+    }
+
+//  상대방도 마찬가지로 만들어져야함
+//  otherUserId: {
+//    userId: ChatRoom
+//  }
+
+}
+
+===
+Friends : {
+    userId: [userId]
+}
