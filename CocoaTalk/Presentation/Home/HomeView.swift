@@ -122,7 +122,6 @@ struct HomeView: View {
                         }
                     }, label: {
                         OtherProfileCellView(user: friend)
-                        Text("")
                     })
                 }
                 .padding(.horizontal)
