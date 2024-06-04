@@ -22,6 +22,7 @@ enum HomeModalDestination: Hashable, Identifiable {
 }
 
 struct HomeView: View {
+    @Environment(\.colorScheme) var colorScheme
     @StateObject var vm: HomeViewModel
     @EnvironmentObject var container: DIContainer
 
@@ -46,7 +47,7 @@ struct HomeView: View {
         switch vm.phase {
         case .notRequested:
             /// Placeholder View
-            Color.secondary
+            ((colorScheme == .dark) ? Color.black : Color.white)
                 .task {
                     await vm.send(action: .load)
                 }
