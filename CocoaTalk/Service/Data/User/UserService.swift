@@ -11,6 +11,9 @@ protocol UserServiceType {
     func loginUser(_ user: User) async throws -> User
     func loadFriends(_ user: User) async throws -> [User]
     func getUser(userId: String) async throws -> User
+    func updateName(userId: String, name: String) async throws
+    func updateDescription(userId: String, description: String) async throws
+    func updateProfileURL(userId: String, urlString: String) async throws
 }
 
 class UserService: UserServiceType {
@@ -49,6 +52,20 @@ class UserService: UserServiceType {
             throw ServiceError.error(error)
         }
     }
+    
+    func updateName(userId: String, name: String) async throws {
+        try await dbRepository.updateUser(userId: userId, key: "name", value: name)
+    }
+    
+    func updateDescription(userId: String, description: String) async throws {
+        try await dbRepository.updateUser(userId: userId, key: "description", value: description)
+    }
+    
+    func updateProfileURL(userId: String, urlString: String) async throws {
+        try await dbRepository.updateUser(userId: userId, key: "profileURL", value: urlString)
+    }
+    
+    
 }
 
 class StubUserService: UserServiceType {
@@ -62,5 +79,14 @@ class StubUserService: UserServiceType {
     
     func getUser(userId: String) async throws -> User {
         User(id: userId, name: "이름")
+    }
+    
+    func updateName(userId: String, name: String) async throws {
+    }
+    
+    func updateDescription(userId: String, description: String) async throws {
+    }
+    
+    func updateProfileURL(userId: String, urlString: String) async throws {
     }
 }

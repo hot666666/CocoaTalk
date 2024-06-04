@@ -18,6 +18,7 @@ enum DBRepositoryError: Error {
 
 protocol UserDBRepositoryType {
     func addUser(_ object: UserObject) async throws
+    func updateUser(userId: String, key: String, value: Any) async throws 
     func getUser(userId: String) async throws -> UserObject
     func loadFriends(_ object: UserObject) async throws -> [UserObject]
 }
@@ -31,6 +32,12 @@ class UserDBRepository: UserDBRepositoryType {
         } else {
             return key
         }
+    }
+    
+    func updateUser(userId: String, key: String, value: Any) async throws  {
+        let path = getPath(key: DBKey.Users, path: "\(userId)/\(key)")
+ 
+        try await db.child(path).setValue(value)
     }
     
     func getUser(userId: String) async throws -> UserObject {

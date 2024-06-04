@@ -23,6 +23,7 @@ enum HomeModalDestination: Hashable, Identifiable {
 
 struct HomeView: View {
     @StateObject var vm: HomeViewModel
+    @EnvironmentObject var container: DIContainer
 
     var body: some View {
         NavigationStack {
@@ -30,9 +31,10 @@ struct HomeView: View {
                 .fullScreenCover(item: $vm.modalDestination) {
                     switch $0 {
                     case .myProfile:
-                        ProfileView(user: vm.loggedInUser!)
+                        MyProfileView(vm: .init(container: container, user: vm.loggedInUser!))
+                            .environmentObject(vm)
                     case let .otherProfile(friend):
-                        ProfileView(user: friend, isMine: false)
+                        OtherProfileView(user: friend)
                     }
                 }
         }
@@ -43,8 +45,8 @@ struct HomeView: View {
     var contentView: some View {
         switch vm.phase {
         case .notRequested:
-            // Placeholder View
-            Color.white
+            /// Placeholder View
+            Color.secondary
                 .task {
                     await vm.send(action: .load)
                 }
@@ -59,7 +61,7 @@ struct HomeView: View {
                             .font(.title)
                     }
                     
-                    // TODO: - HomeView 상단바
+                    // TODO: - HomeView 상단바 구현
                     ToolbarItem(placement: .topBarTrailing) {
                         HStack{
                             Button {
@@ -111,7 +113,7 @@ struct HomeView: View {
             }
             .padding(.horizontal)
             
-            // TODO: - 친구 0명일 때, 추가 방식
+            // TODO: - 친구 0명일 때, 추가 방식 추가
             LazyVStack{
                 ForEach(vm.friends, id: \.self){ friend in
                     Button(action: {
@@ -130,5 +132,10 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView(vm: .init(container: .stub, userId: "loggedInUser"))
+    let container: DIContainer = .stub
+    let user: User = .stubUser
+    let vm: HomeViewModel = .init(container: container, userId: user.id)
+    vm.loggedInUser = user
+    
+    return HomeView(vm: vm).environmentObject(container)
 }
