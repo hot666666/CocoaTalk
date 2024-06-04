@@ -52,7 +52,7 @@ struct OtherProfileView: View {
     }
     
     var profileView: some View {
-        URLImageView(urlString: user.profileURL)
+        URLImageView(urlString: user.profileURL, backgroundColor: .mint)
             .frame(width: 100, height: 100)
             .clipShape(RoundedRectangle(cornerRadius: 40))
     }

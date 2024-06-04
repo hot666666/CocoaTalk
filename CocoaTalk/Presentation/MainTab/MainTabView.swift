@@ -41,7 +41,9 @@ struct MainTabView: View {
                     case .home:
                         HomeView(vm: .init(container: container, userId: authViewModel.userId!))
                     case .chat:
-                        Color.white
+                        Color.blue
+                    case .more:
+                        Color.secondary
                             .overlay {
                                 Button(action: {
                                     Task {
@@ -51,8 +53,6 @@ struct MainTabView: View {
                                     Text("로구아웃")
                                 }
                             }
-                    case .more:
-                        Color.blue
                     }
                 }
                 .tabItem {

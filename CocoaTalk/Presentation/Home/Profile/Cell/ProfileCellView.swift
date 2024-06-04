@@ -18,7 +18,7 @@ struct MyProfileCellView: View {
             
             VStack(alignment: .leading) {
                 Text(user.name)
-                    .font(.title3)
+                    .font(.title2)
                     .bold()
                 if let description = user.description {
                     Text(description)
@@ -36,7 +36,7 @@ struct OtherProfileCellView: View {
     
     var body: some View {
         HStack {
-            URLImageView(urlString: user.profileURL, size: 24)
+            URLImageView(urlString: user.profileURL, backgroundColor: .mint, size: 24)
                 .frame(width: 60, height: 60)
                 .clipShape(RoundedRectangle(cornerRadius: 24))
             
