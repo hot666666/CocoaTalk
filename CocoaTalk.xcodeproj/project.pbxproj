@@ -194,7 +194,6 @@
 			isa = PBXGroup;
 			children = (
 				45BF38D42C0848D0000E1EA5 /* View */,
-				45BF38D32C0848C3000E1EA5 /* Extension */,
 				45BF39202C0ABAE2000E1EA5 /* Constant.swift */,
 			);
 			path = General;
@@ -206,13 +205,6 @@
 				45BF39902C0E6C61000E1EA5 /* SHA256.swift */,
 			);
 			path = Util;
-			sourceTree = "<group>";
-		};
-		45BF38D32C0848C3000E1EA5 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extension;
 			sourceTree = "<group>";
 		};
 		45BF38D42C0848D0000E1EA5 /* View */ = {
