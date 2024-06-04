@@ -55,6 +55,7 @@ class MyProfileViewModel: ObservableObject {
             isEditMode = true
         case .removeEditMode:
             updateUser = user
+            imageSelection = nil
             isEditMode = false
         case .submitEditMode:
             updateProfileSubmit()
@@ -79,8 +80,8 @@ extension MyProfileViewModel {
         do {
             let data = try await container.services.photoPickerService.loadTransferable(from: pickerItem)
             let fileName = UUID().uuidString
-            let savedURL = try await FileManagerService.shared.saveImage(data: data, fileName: fileName)
-            updateUser.profileURL = savedURL.absoluteString
+            container.services.imageCacheService.store(for: fileName, image: UIImage(data: data)!, toDisk: false)
+            updateUser.profileURL = fileName
         } catch {
             print(error)
         }
@@ -102,9 +103,10 @@ extension MyProfileViewModel {
         // TODO: - 프사 없을 떄 처리 추가
         if user.profileURL != updateUser.profileURL, let fileURLString = updateUser.profileURL {
             Task {
-                let fileURL = URL(string: fileURLString)!
-                if let data = try? await FileManagerService.shared.loadImage(fileName: fileURL.lastPathComponent),
-                   let uploadedURL = try? await container.services.uploadService.uploadImage(source: .profile(userId: userId), data: data) {
+                
+                if let data = container.services.imageCacheService.tempImage(for: fileURLString),
+                   let datadata = data.pngData(),
+                   let uploadedURL = try? await container.services.uploadService.uploadImage(source: .profile(userId: userId), data: datadata) {
                     let uploadedURLString = uploadedURL.absoluteString
                     try? await container.services.userService.updateProfileURL(userId: userId, urlString: uploadedURLString)
                     updateUser.profileURL = uploadedURLString
