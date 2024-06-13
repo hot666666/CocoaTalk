@@ -27,7 +27,7 @@ struct HomeView: View {
     @EnvironmentObject var container: DIContainer
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $container.navigationRouter.destinations) {
             contentView
                 .fullScreenCover(item: $vm.modalDestination) {
                     switch $0 {
@@ -35,8 +35,13 @@ struct HomeView: View {
                         MyProfileView(vm: .init(container: container, user: vm.loggedInUser!))
                             .environmentObject(vm)
                     case let .otherProfile(friend):
-                        OtherProfileView(user: friend)
+                        OtherProfileView(otherUser: friend) { otherUser in
+                            await vm.send(action: .goToChat(otherUser))
+                        }
                     }
+                }
+                .navigationDestination(for: NavigationDestination.self) {
+                    NavigationRoutingView(destination: $0)
                 }
         }
     }
@@ -135,7 +140,7 @@ struct HomeView: View {
 #Preview {
     let container: DIContainer = .stub
     let user: User = .stubUser
-    let vm: HomeViewModel = .init(container: container, userId: user.id)
+    let vm: HomeViewModel = .init(container: container, userId: user.id, selectedMainTab: .constant(MainTabType.home))
     vm.loggedInUser = user
     
     return HomeView(vm: vm).environmentObject(container)

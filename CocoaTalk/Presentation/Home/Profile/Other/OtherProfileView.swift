@@ -9,8 +9,10 @@ import SwiftUI
 
 struct OtherProfileView: View {
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var container: DIContainer
     
-    let user: User
+    let otherUser: User
+    var goToChat: (User) async -> Void
     
     var body: some View {
         NavigationStack {
@@ -45,26 +47,23 @@ struct OtherProfileView: View {
                 }
             }
             .foregroundColor(.white)
-            .task {
-                //                await vm.getUser()
-            }
         }
     }
     
     var profileView: some View {
-        URLImageView(urlString: user.profileURL, backgroundColor: .mint)
+        URLImageView(urlString: otherUser.profileURL, backgroundColor: .mint)
             .frame(width: 100, height: 100)
             .clipShape(RoundedRectangle(cornerRadius: 40))
     }
     
     var nameView: some View {
-        Text(user.name)
+        Text(otherUser.name)
             .font(.title2)
         
     }
     
     var descriptionView: some View {
-        Text(user.description ?? " ")
+        Text(otherUser.description ?? " ")
     }
     
     var menuView: some View {
@@ -79,7 +78,11 @@ struct OtherProfileView: View {
     
     var defaultMenuView: some View {
         HStack(alignment: .bottom, spacing: 27) {
-            Button(action: {}, label: {
+            Button(action: {
+                Task {
+                    await goToChat(otherUser)
+                }
+            }, label: {
                 VStack(spacing: 10) {
                     Image(systemName: "message.fill")
                         .font(.title3)
@@ -101,5 +104,7 @@ struct OtherProfileView: View {
 }
 
 #Preview {
-    OtherProfileView(user: User.stubUsers[0])
+    OtherProfileView(otherUser: User.stubUsers[0]){ _ in
+        
+    }
 }

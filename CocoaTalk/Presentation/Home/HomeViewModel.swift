@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class HomeViewModel: ObservableObject {
     enum Action {
@@ -22,11 +23,13 @@ class HomeViewModel: ObservableObject {
     
     var userId: String
     
+    private var selectedMainTab: Binding<MainTabType>
     private var container: DIContainer
     
-    init(container: DIContainer, userId: String) {
+    init(container: DIContainer, userId: String, selectedMainTab: Binding<MainTabType>) {
         self.container = container
         self.userId = userId
+        self.selectedMainTab = selectedMainTab
     }
     
     @MainActor
@@ -48,8 +51,14 @@ class HomeViewModel: ObservableObject {
             print("gg")
         case .presentView(let homeModalDestination):
             modalDestination = homeModalDestination
-        case .goToChat(let user):
-            print("gg")
+        case .goToChat(let otherUser):
+            if let chatRoom = try? await container.services.chatRoomService.createChatRoomIfNeeded(myUserId: loggedInUser!.id, otherUserId: otherUser.id, otherUserName: otherUser.name){
+                withAnimation {
+                    modalDestination = nil
+                    selectedMainTab.wrappedValue = .chat
+                    container.navigationRouter.push(to: .chat(chatRoomId: chatRoom.chatRoomId, myUserId: loggedInUser!.id, otherUserId: otherUser.id))
+                }
+            }
         }
     }
 }
