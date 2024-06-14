@@ -39,9 +39,11 @@ struct MainTabView: View {
                 Group {
                     switch tab {
                     case .home:
-                        HomeView(vm: .init(container: container, userId: authViewModel.userId!))
+                        HomeView(vm: .init(container: container, userId: authViewModel.userId!, selectedMainTab: $selectedTab))
                     case .chat:
-                        Color.secondary
+                        ChatListView(vm: .init(container: container, userId: authViewModel.userId!))
+                    case .more:
+                        Color.blue
                             .overlay {
                                 Button(action: {
                                     Task {
@@ -51,8 +53,6 @@ struct MainTabView: View {
                                     Text("로구아웃")
                                 }
                             }
-                    case .more:
-                        Color.blue
                     }
                 }
                 .tabItem {
