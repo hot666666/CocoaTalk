@@ -65,7 +65,7 @@ struct ChatListView: View {
             
             Spacer()
             
-            Group {
+            HStack {
                 // TODO: - SearchBar
                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
                     Image(systemName:"magnifyingglass")
@@ -79,7 +79,6 @@ struct ChatListView: View {
                 })
             }
             .foregroundColor(.primary)
-            .font(.title3)
             
         }
         .padding(.horizontal)
