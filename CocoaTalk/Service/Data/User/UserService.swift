@@ -14,6 +14,7 @@ protocol UserServiceType {
     func updateName(userId: String, name: String) async throws
     func updateDescription(userId: String, description: String) async throws
     func updateProfileURL(userId: String, urlString: String) async throws
+    func addFriendById(_ userId: String, loggedInUserId: String) async throws
 }
 
 class UserService: UserServiceType {
@@ -33,6 +34,19 @@ class UserService: UserServiceType {
         } catch {
             throw ServiceError.error(error)
         }
+    }
+    
+    func addFriendById(_ userId: String, loggedInUserId: String) async throws {
+        guard let existingUser = try? await dbRepository.getUser(userId: userId) else {
+            throw DBRepositoryError.notFoundError
+        }
+        
+        do {
+            try await dbRepository.addFriend(existingUser, loggedInUserId: loggedInUserId)
+        } catch {
+            throw DBRepositoryError.addFreindError
+        }
+        
     }
     
     func loadFriends(_ user: User) async throws -> [User] {
@@ -79,6 +93,10 @@ class StubUserService: UserServiceType {
     
     func getUser(userId: String) async throws -> User {
         User(id: userId, name: "이름")
+    }
+    
+    func addFriendById(_ userId: String, loggedInUserId: String) async throws {
+        
     }
     
     func updateName(userId: String, name: String) async throws {
