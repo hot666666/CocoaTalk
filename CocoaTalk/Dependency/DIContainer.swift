@@ -15,6 +15,7 @@ class DIContainer: ObservableObject {
          navigationRouter: NavigationRoutable & ObservableObjectSettable = NavigationRouter()) {
         self.services = services
         self.navigationRouter = navigationRouter
+        self.navigationRouter.setObjectWillChange(objectWillChange)
     }
 }
 
