@@ -60,6 +60,18 @@ struct HomeView: View {
             LoadingView()
         case .success:
             loadedView
+                .sheet(isPresented: $vm.isPresentedAddFriendView, content: {
+                    VStack{
+                        TextField("", text: $vm.addFriendId)
+                            .padding()
+                            .onSubmit {
+                                Task {
+                                    await vm.send(action: .addFriend)
+                                }
+                            }
+                            .border(Color.secondary, width: 1)
+                    }
+                })
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         Text("친구")
@@ -76,7 +88,7 @@ struct HomeView: View {
                                 Image(systemName: "magnifyingglass")
                             }
                             Button {
-                                
+                                vm.isPresentedAddFriendView.toggle()
                             } label: {
                                 Image(systemName: "person.badge.plus")
                             }

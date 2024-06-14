@@ -14,12 +14,14 @@ class HomeViewModel: ObservableObject {
         case requestContacts
         case presentView(HomeModalDestination)
         case goToChat(User)
+        case addFriend
     }
-    
+    @Published var isPresentedAddFriendView: Bool = false
     @Published var phase: Phase = .notRequested
     @Published var loggedInUser: User?
     @Published var friends: [User] = []
     @Published var modalDestination: HomeModalDestination?
+    @Published var addFriendId: String = ""
     
     var userId: String
     
@@ -58,6 +60,14 @@ class HomeViewModel: ObservableObject {
                     selectedMainTab.wrappedValue = .chat
                     container.navigationRouter.push(to: .chat(chatRoomId: chatRoom.chatRoomId, myUserId: loggedInUser!.id, otherUserId: otherUser.id))
                 }
+            }
+        case .addFriend:
+            do {
+                try await container.services.userService.addFriendById(addFriendId, loggedInUserId: userId)
+                isPresentedAddFriendView = false
+                addFriendId = ""
+            } catch {
+                print(error)
             }
         }
     }
