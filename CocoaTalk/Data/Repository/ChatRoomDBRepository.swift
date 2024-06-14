@@ -7,45 +7,6 @@
 
 import FirebaseDatabase
 
-protocol DBReferenceType {
-    func setValue(key: String, path: String?, value: Any) async throws
-    func fetch(key: String, path: String?) async throws -> Any?
-    func setValues(_ values: [String: Any]) async throws
-}
-
-class DBReference: DBReferenceType {
-    
-    var db: DatabaseReference = Database.database().reference()
-    
-    private func getPath(key: String, path: String?) -> String {
-        if let path {
-            return "\(key)/\(path)"
-        } else {
-            return key
-        }
-    }
-    
-    func setValue(key: String, path: String?, value: Any) async throws {
-        try await db.child(getPath(key: key, path: path)).setValue(value)
-    }
-    
-    func fetch(key: String, path: String?) async throws -> Any? {
-        try await db.child(getPath(key: key, path: path)).getData().value
-    }
-    
-    func setValues(_ values: [String: Any]) async throws {
-        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-            self.db.updateChildValues(values) { error, _ in
-                if let error = error {
-                    continuation.resume(throwing: DBError.error(error))
-                } else {
-                    continuation.resume(returning: ())
-                }
-            }
-        }
-    }
-}
-
 protocol ChatRoomDBRepositoryType {
     func getChatRoom(myUserId: String, otherUserId: String) async throws -> ChatRoomObject?
     func addChatRoom(_ object: ChatRoomObject, myUserId: String) async throws
@@ -55,11 +16,9 @@ protocol ChatRoomDBRepositoryType {
 
 class ChatRoomDBRepository: ChatRoomDBRepositoryType {
     
-//    private let reference: DBReferenceType
     private var db: DatabaseReference
     
     init(reference: DBReferenceType = DBReference()) {
-//        self.reference = reference
         db = Database.database().reference()
     }
     
@@ -95,29 +54,30 @@ class ChatRoomDBRepository: ChatRoomDBRepositoryType {
     }
     
     func addChatRoom(_ object: ChatRoomObject, myUserId: String) async throws {
+        let otherObject: ChatRoomObject = .init(chatRoomId: object.chatRoomId, otherUserName: myUserId, otherUserId: object.otherUserId)
+        
         guard
             let data = try? JSONEncoder().encode(object),
-            /// Firebase Database는 NSNumber, NSString, NSDictionary, NSArray 타입의 객체만 저장가능
-            /// 따라서 인코딩된 Data 객체를 NSDictionary나 NSArray로 변환해야함
-            let jsonEncodedChatRoom = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
+            let jsonEncodedChatRoom = try? JSONSerialization.jsonObject(with: data, options: .allowFragments),
+            let otherData = try? JSONEncoder().encode(otherObject),
+            let jsonEncodedOtherChatRoom = try? JSONSerialization.jsonObject(with: otherData, options: .allowFragments)
         else {
             throw DBRepositoryError.encodingError
         }
+
         let path = getPath(key: DBKey.ChatRooms, path: "\(myUserId)/\(object.otherUserId)")
-        
-        
-        guard
-            let data = try? JSONEncoder().encode(object),
-            /// Firebase Database는 NSNumber, NSString, NSDictionary, NSArray 타입의 객체만 저장가능
-            /// 따라서 인코딩된 Data 객체를 NSDictionary나 NSArray로 변환해야함
-            let jsonEncodedChatRoom = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
-        else {
-            throw DBRepositoryError.encodingError
-        }
-        let path2 = getPath(key: DBKey.ChatRooms, path: "\(object.otherUserId)/\(myUserId)")
+        let otherPath = getPath(key: DBKey.ChatRooms, path: "\(object.otherUserId)/\(myUserId)")
 
         do {
-            try await db.child(path).setValue(jsonEncodedChatRoom)
+            try await withThrowingTaskGroup(of: Void.self) { group in
+                group.addTask {
+                    try await self.db.child(path).setValue(jsonEncodedChatRoom)
+                }
+                group.addTask {
+                    try await self.db.child(otherPath).setValue(jsonEncodedOtherChatRoom)
+                }
+                try await group.waitForAll()
+            }
         } catch {
             throw DBRepositoryError.setValueError
         }
