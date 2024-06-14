@@ -7,7 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4595C29E2C1920F7003E5A09 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4595C29D2C1920EF003E5A09 /* ChatView.swift */; };
+		450151522C1ADD7D001D79FE /* KeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450151512C1ADD75001D79FE /* KeyboardToolbar.swift */; };
+		450151542C1AE0F7001D79FE /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450151532C1AE0F4001D79FE /* Chat.swift */; };
+		450151572C1AE198001D79FE /* ChatObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450151562C1AE194001D79FE /* ChatObject.swift */; };
+		4501515A2C1AE34F001D79FE /* ChatKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450151592C1AE34A001D79FE /* ChatKeyboardView.swift */; };
+		4501515C2C1B16C3001D79FE /* ChatsByDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4501515B2C1B16BD001D79FE /* ChatsByDateView.swift */; };
+		4501515E2C1BD011001D79FE /* ChatData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4501515D2C1BD00E001D79FE /* ChatData.swift */; };
+		450151602C1BD5EC001D79FE /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4501515F2C1BD5E7001D79FE /* ChatService.swift */; };
+		450151622C1BE189001D79FE /* DBReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450151612C1BE184001D79FE /* DBReference.swift */; };
+		450151642C1BE27F001D79FE /* ChatDBRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450151632C1BE272001D79FE /* ChatDBRepository.swift */; };
+		450151662C1BE884001D79FE /* ChatRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450151652C1BE87E001D79FE /* ChatRoomViewModel.swift */; };
+		4595C29E2C1920F7003E5A09 /* ChatRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4595C29D2C1920EF003E5A09 /* ChatRoomView.swift */; };
 		45BF38BF2C08465F000E1EA5 /* CocoaTalkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BF38BE2C08465F000E1EA5 /* CocoaTalkApp.swift */; };
 		45BF38C12C08465F000E1EA5 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BF38C02C08465F000E1EA5 /* AuthenticationView.swift */; };
 		45BF38C32C084661000E1EA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45BF38C22C084661000E1EA5 /* Assets.xcassets */; };
@@ -68,7 +78,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4595C29D2C1920EF003E5A09 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		450151512C1ADD75001D79FE /* KeyboardToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardToolbar.swift; sourceTree = "<group>"; };
+		450151532C1AE0F4001D79FE /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		450151562C1AE194001D79FE /* ChatObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatObject.swift; sourceTree = "<group>"; };
+		450151592C1AE34A001D79FE /* ChatKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatKeyboardView.swift; sourceTree = "<group>"; };
+		4501515B2C1B16BD001D79FE /* ChatsByDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsByDateView.swift; sourceTree = "<group>"; };
+		4501515D2C1BD00E001D79FE /* ChatData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatData.swift; sourceTree = "<group>"; };
+		4501515F2C1BD5E7001D79FE /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
+		450151612C1BE184001D79FE /* DBReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBReference.swift; sourceTree = "<group>"; };
+		450151632C1BE272001D79FE /* ChatDBRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDBRepository.swift; sourceTree = "<group>"; };
+		450151652C1BE87E001D79FE /* ChatRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewModel.swift; sourceTree = "<group>"; };
+		4595C29D2C1920EF003E5A09 /* ChatRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomView.swift; sourceTree = "<group>"; };
 		45BF38BB2C08465F000E1EA5 /* CocoaTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45BF38BE2C08465F000E1EA5 /* CocoaTalkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocoaTalkApp.swift; sourceTree = "<group>"; };
 		45BF38C02C08465F000E1EA5 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
@@ -141,12 +161,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4595C29C2C1920B6003E5A09 /* Chat */ = {
+		450151552C1AE18D001D79FE /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				4595C29D2C1920EF003E5A09 /* ChatView.swift */,
+				4501515F2C1BD5E7001D79FE /* ChatService.swift */,
+				450151562C1AE194001D79FE /* ChatObject.swift */,
 			);
 			path = Chat;
+			sourceTree = "<group>";
+		};
+		450151582C1AE267001D79FE /* Subview */ = {
+			isa = PBXGroup;
+			children = (
+				4501515B2C1B16BD001D79FE /* ChatsByDateView.swift */,
+				450151592C1AE34A001D79FE /* ChatKeyboardView.swift */,
+				450151512C1ADD75001D79FE /* KeyboardToolbar.swift */,
+			);
+			path = Subview;
+			sourceTree = "<group>";
+		};
+		4595C29C2C1920B6003E5A09 /* ChatRoom */ = {
+			isa = PBXGroup;
+			children = (
+				450151582C1AE267001D79FE /* Subview */,
+				4595C29D2C1920EF003E5A09 /* ChatRoomView.swift */,
+				450151652C1BE87E001D79FE /* ChatRoomViewModel.swift */,
+			);
+			path = ChatRoom;
 			sourceTree = "<group>";
 		};
 		45BF38B22C08465F000E1EA5 = {
@@ -215,7 +256,7 @@
 		45BF38D02C084858000E1EA5 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				4595C29C2C1920B6003E5A09 /* Chat */,
+				4595C29C2C1920B6003E5A09 /* ChatRoom */,
 				45BF39992C0FE213000E1EA5 /* ChatList */,
 				45BF39052C098E5B000E1EA5 /* Home */,
 				45BF39022C0984CC000E1EA5 /* MainTab */,
@@ -288,6 +329,8 @@
 		45BF38FC2C086FCF000E1EA5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4501515D2C1BD00E001D79FE /* ChatData.swift */,
+				450151532C1AE0F4001D79FE /* Chat.swift */,
 				45BF38FD2C086FDD000E1EA5 /* User.swift */,
 				45BF39A62C0FE46A000E1EA5 /* ChatRoom.swift */,
 			);
@@ -337,6 +380,8 @@
 			isa = PBXGroup;
 			children = (
 				45BF39132C0AB4A5000E1EA5 /* DBError.swift */,
+				450151612C1BE184001D79FE /* DBReference.swift */,
+				450151632C1BE272001D79FE /* ChatDBRepository.swift */,
 				45BF39112C0AB416000E1EA5 /* UserDBRepository.swift */,
 				45BF39AE2C0FFB34000E1EA5 /* ChatRoomDBRepository.swift */,
 			);
@@ -346,6 +391,7 @@
 		45BF391C2C0AB705000E1EA5 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				450151552C1AE18D001D79FE /* Chat */,
 				45BF39AB2C0FF9B5000E1EA5 /* ChatRoom */,
 				45BF39702C0DBB45000E1EA5 /* Image */,
 				45BF391F2C0AB766000E1EA5 /* User */,
@@ -560,8 +606,9 @@
 				45BF391E2C0AB73E000E1EA5 /* ServiceError.swift in Sources */,
 				45BF39B12C100396000E1EA5 /* ChatRoomObject.swift in Sources */,
 				45BF39A32C0FE321000E1EA5 /* ObservableObjectSettable.swift in Sources */,
+				450151542C1AE0F7001D79FE /* Chat.swift in Sources */,
 				45BF39232C0B2B06000E1EA5 /* HomeViewModel.swift in Sources */,
-				4595C29E2C1920F7003E5A09 /* ChatView.swift in Sources */,
+				4595C29E2C1920F7003E5A09 /* ChatRoomView.swift in Sources */,
 				45BF39142C0AB4A5000E1EA5 /* DBError.swift in Sources */,
 				45BF396C2C0D4AE5000E1EA5 /* PhotoImage.swift in Sources */,
 				45BF398D2C0E694A000E1EA5 /* DiskStorage.swift in Sources */,
@@ -570,6 +617,7 @@
 				45BF39692C0D4A93000E1EA5 /* PhotoPickerService.swift in Sources */,
 				45BF399E2C0FE2EB000E1EA5 /* NavigationDestination.swift in Sources */,
 				45BF38EF2C0853A1000E1EA5 /* Services.swift in Sources */,
+				450151572C1AE198001D79FE /* ChatObject.swift in Sources */,
 				45BF38F92C08606E000E1EA5 /* LoginView.swift in Sources */,
 				45BF38ED2C085355000E1EA5 /* DIContainer.swift in Sources */,
 				45BF39852C0DE257000E1EA5 /* URLImageView.swift in Sources */,
@@ -580,30 +628,38 @@
 				45BF39AD2C0FF9C4000E1EA5 /* ChatRoomService.swift in Sources */,
 				45BF39A72C0FE46A000E1EA5 /* ChatRoom.swift in Sources */,
 				45BF39812C0DD6F4000E1EA5 /* ProfileCellView.swift in Sources */,
+				450151622C1BE189001D79FE /* DBReference.swift in Sources */,
 				45BF390E2C09C174000E1EA5 /* MyProfileView.swift in Sources */,
 				45BF39042C0984E4000E1EA5 /* MainTabView.swift in Sources */,
+				4501515E2C1BD011001D79FE /* ChatData.swift in Sources */,
 				45BF399B2C0FE220000E1EA5 /* ChatListView.swift in Sources */,
 				45BF39AF2C0FFB34000E1EA5 /* ChatRoomDBRepository.swift in Sources */,
 				45BF38FE2C086FDD000E1EA5 /* User.swift in Sources */,
 				45BF39912C0E6C61000E1EA5 /* SHA256.swift in Sources */,
 				45BF39A52C0FE378000E1EA5 /* NavigationRoutingView.swift in Sources */,
 				45BF39A02C0FE2F8000E1EA5 /* NavigationRouter.swift in Sources */,
+				4501515A2C1AE34F001D79FE /* ChatKeyboardView.swift in Sources */,
 				45BF39AA2C0FF2AF000E1EA5 /* Date+Extension.swift in Sources */,
+				4501515C2C1B16C3001D79FE /* ChatsByDateView.swift in Sources */,
 				45BF39162C0AB4B9000E1EA5 /* UserObject.swift in Sources */,
 				45BF39722C0DBB53000E1EA5 /* UploadService.swift in Sources */,
 				45BF39002C088F4A000E1EA5 /* AuthenticationViewModel.swift in Sources */,
 				45BF398F2C0E694A000E1EA5 /* MemoryStorage.swift in Sources */,
 				45BF39212C0ABAE2000E1EA5 /* Constant.swift in Sources */,
 				45BF39192C0AB4FF000E1EA5 /* UserService.swift in Sources */,
+				450151602C1BD5EC001D79FE /* ChatService.swift in Sources */,
 				45BF397F2C0DD64F000E1EA5 /* MyProfileViewModel.swift in Sources */,
 				45BF397D2C0DD579000E1EA5 /* MyProfileUpdateView.swift in Sources */,
 				45BF39B32C10349C000E1EA5 /* String+Extension.swift in Sources */,
+				450151522C1ADD7D001D79FE /* KeyboardToolbar.swift in Sources */,
 				45BF38C12C08465F000E1EA5 /* AuthenticationView.swift in Sources */,
 				45BF39072C098E66000E1EA5 /* HomeView.swift in Sources */,
 				45BF38BF2C08465F000E1EA5 /* CocoaTalkApp.swift in Sources */,
 				45BF39122C0AB416000E1EA5 /* UserDBRepository.swift in Sources */,
 				45BF39982C0F0163000E1EA5 /* URLImageViewModel.swift in Sources */,
 				45BF38FB2C086AB2000E1EA5 /* LoginButtonStyle.swift in Sources */,
+				450151662C1BE884001D79FE /* ChatRoomViewModel.swift in Sources */,
+				450151642C1BE27F001D79FE /* ChatDBRepository.swift in Sources */,
 				45BF39832C0DDC54000E1EA5 /* OtherProfileView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -663,7 +719,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -720,7 +776,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -749,6 +805,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -781,6 +838,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
