@@ -53,7 +53,7 @@ fileprivate struct URLInnerImageView: View {
     }
 }
 
-fileprivate struct DefaultBackgroundView: View {
+struct DefaultBackgroundView: View {
     let size: CGFloat
     var backgroundColor: Color
     
