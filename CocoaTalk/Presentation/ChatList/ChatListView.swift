@@ -39,12 +39,39 @@ struct ChatListView: View {
     
     var body: some View {
         NavigationStack(path: $container.navigationRouter.destinations) {
-            header
-            
             ScrollView {
                 ForEach(vm.chatRooms, id: \.self) { chatRoom in
                     ChatRoomCell(chatRoom: chatRoom, myUserId: vm.userId)
                         .padding(.top, 10)
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Text("채팅")
+                        .bold()
+                        .font(.title)
+                        .frame(height: 60)
+                }
+                
+                // TODO: - ChatListView 상단바 구현
+                ToolbarItem(placement: .topBarTrailing) {
+                    HStack {
+                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                            Image(systemName:"magnifyingglass")
+                                .frame(width: 24, height: 24)
+                        })
+                        Button(action: {}, label: {
+                            Image(systemName:"plus.message")
+                                .frame(width: 24, height: 24)
+                            
+                        })
+                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                            Image(systemName:"gearshape")
+                                .frame(width: 24, height: 24)
+                        })
+                    }
+                    .frame(height: 44)
+                    .foregroundColor(.primary)
                 }
             }
             .navigationDestination(for: NavigationDestination.self) {
@@ -55,35 +82,6 @@ struct ChatListView: View {
             }
         }
     }
-    
-    @ViewBuilder
-    var header: some View {
-        HStack{
-            Text("채팅")
-                .bold()
-                .font(.title)
-            
-            Spacer()
-            
-            HStack {
-                // TODO: - SearchBar
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    Image(systemName:"magnifyingglass")
-                })
-                Button(action: {}, label: {
-                    Image(systemName:"plus.message")
-                    
-                })
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    Image(systemName:"gearshape")
-                })
-            }
-            .foregroundColor(.primary)
-            
-        }
-        .padding(.horizontal)
-        Divider()
-    }
 }
 
 fileprivate struct ChatRoomCell: View {
@@ -93,9 +91,9 @@ fileprivate struct ChatRoomCell: View {
     @State var otherUserProfile: String? = nil
     
     var body: some View {
-        NavigationLink(value: NavigationDestination.chat(chatRoomId: chatRoom.chatRoomId,
-                                                         myUserId: myUserId,
-                                                         otherUserId: chatRoom.otherUserId)) {
+        Button(action: {
+            container.navigationRouter.push(to: .chat(chatRoomId: chatRoom.chatRoomId, myUserId: myUserId, otherUserId: chatRoom.otherUserId))
+        }, label: {
             HStack(spacing: 8) {
                 URLImageView(urlString: otherUserProfile, backgroundColor: .mint, size: 24)
                     .frame(width: 60, height: 60)
@@ -114,16 +112,17 @@ fileprivate struct ChatRoomCell: View {
                 Text(chatRoom.lastMessageDate?.monthAndDay ?? " ")
                     .foregroundColor(.secondary)
             }
-            .task {
-                if let otherUser = try? await container.services.userService.getUser(userId: chatRoom.otherUserId){
-                    otherUserProfile = otherUser.profileURL
-                }
-            }
             .padding(.horizontal)
             .padding(.bottom, 10)
+        })
+        .task {
+            if let otherUser = try? await container.services.userService.getUser(userId: chatRoom.otherUserId){
+                otherUserProfile = otherUser.profileURL
+            }
         }
     }
 }
+
 
 #Preview {
     ChatListView(vm: .init(container: DIContainer.stub, userId: "user_id"))

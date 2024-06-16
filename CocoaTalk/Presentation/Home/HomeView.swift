@@ -77,6 +77,7 @@ struct HomeView: View {
                         Text("친구")
                             .bold()
                             .font(.title)
+                            .frame(height: 60)
                     }
                     
                     // TODO: - HomeView 상단바 구현
@@ -86,18 +87,22 @@ struct HomeView: View {
                                 container.navigationRouter.push(to: .search(userId: vm.userId))
                             } label: {
                                 Image(systemName: "magnifyingglass")
+                                    .frame(width: 24, height: 24)
                             }
                             Button {
                                 vm.isPresentedAddFriendView.toggle()
                             } label: {
                                 Image(systemName: "person.badge.plus")
+                                    .frame(width: 24, height: 24)
                             }
                             Button {
                                 
                             } label: {
                                 Image(systemName: "gearshape")
+                                    .frame(width: 24, height: 24)
                             }
                         }
+                        .frame(height: 44)
                         .foregroundColor(.primary)
                     }
                 }
