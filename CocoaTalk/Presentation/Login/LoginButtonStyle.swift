@@ -27,5 +27,7 @@ struct LoginButtonStyle: ButtonStyle {
             }
             .padding(.horizontal, 15)
             .opacity(configuration.isPressed ? 0.5 : 1)
+            /// 터치 영역을 확장
+            .contentShape(Rectangle())
     }
 }

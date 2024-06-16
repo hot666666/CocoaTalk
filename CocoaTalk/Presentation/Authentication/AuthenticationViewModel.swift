@@ -15,11 +15,13 @@ enum AuthenticationState {
 class AuthenticationViewModel: ObservableObject {
     enum Action {
         case googleLogin
+        case logout
     }
     
-    @Published var authenticationState: AuthenticationState = .unauthenticated
     @Published var isLoading: Bool = false
-    var userId: String?
+    // MARK: - fast login
+    @Published var authenticationState: AuthenticationState = .authenticated
+    var userId: String? = "OomlQWpxfYNXxlbVU40JsA5jdz82"
     
     private var container: DIContainer
     init(container: DIContainer) {
@@ -31,13 +33,28 @@ class AuthenticationViewModel: ObservableObject {
         switch action {
         case .googleLogin:
             isLoading = true
+            defer { isLoading = false }
             
-            if let user = try? await container.services.authService.signInWithGoogle() {
+            do {
+                let googleUser = try await container.services.authService.signInWithGoogle()
+                let user = try await container.services.userService.loginUser(googleUser)
                 userId = user.id
                 authenticationState = .authenticated
+            } catch {
+                print(error)
             }
             
-            isLoading = false
+        case .logout:
+            defer {
+                authenticationState = .unauthenticated
+                userId = nil
+            }
+            
+            do {
+                try await container.services.authService.logout()
+            } catch {
+                print(error)
+            }
         }
     }
 }

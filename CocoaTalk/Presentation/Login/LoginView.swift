@@ -32,6 +32,7 @@ struct LoginIntroView: View {
                         .bold()
                 })
                 .buttonStyle(LoginButtonStyle(textColor: .yellow))
+                
             }
             .navigationDestination(isPresented: $isPresented) {
                 LoginView()
@@ -52,7 +53,6 @@ struct LoginView: View {
                         .font(.title)
                         .bold()
                     Text("아래 제공되는 서비스로 로그인 해주세요.")
-                        .foregroundColor(.secondary)
                 }
                 Spacer()
             }
@@ -67,15 +67,11 @@ struct LoginView: View {
             }, label: {
                 Text("Google로 로그인")
             })
-            .buttonStyle(LoginButtonStyle(textColor: .black, borderColor: .gray))
+            .buttonStyle(LoginButtonStyle(textColor: .secondary, borderColor: .secondary))
         }
         .overlay {
             if vm.isLoading {
-                ZStack{
-                    Color.black.opacity(0.1)
-                    ProgressView()
-                }
-                .ignoresSafeArea()
+                LoadingView()
             }
         }
         .navigationBarBackButtonHidden()

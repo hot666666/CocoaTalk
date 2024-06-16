@@ -22,18 +22,26 @@ enum HomeModalDestination: Hashable, Identifiable {
 }
 
 struct HomeView: View {
+    @Environment(\.colorScheme) var colorScheme
     @StateObject var vm: HomeViewModel
+    @EnvironmentObject var container: DIContainer
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $container.navigationRouter.destinations) {
             contentView
                 .fullScreenCover(item: $vm.modalDestination) {
                     switch $0 {
                     case .myProfile:
-                        ProfileView(user: vm.loggedInUser!)
+                        MyProfileView(vm: .init(container: container, user: vm.loggedInUser!))
+                            .environmentObject(vm)
                     case let .otherProfile(friend):
-                        ProfileView(user: friend, isMine: false)
+                        OtherProfileView(otherUser: friend) { otherUser in
+                            await vm.send(action: .goToChat(otherUser))
+                        }
                     }
+                }
+                .navigationDestination(for: NavigationDestination.self) {
+                    NavigationRoutingView(destination: $0)
                 }
         }
     }
@@ -43,8 +51,8 @@ struct HomeView: View {
     var contentView: some View {
         switch vm.phase {
         case .notRequested:
-            // Placeholder View
-            Color.white
+            /// Placeholder View
+            ((colorScheme == .dark) ? Color.black : Color.white)
                 .task {
                     await vm.send(action: .load)
                 }
@@ -52,6 +60,18 @@ struct HomeView: View {
             LoadingView()
         case .success:
             loadedView
+                .sheet(isPresented: $vm.isPresentedAddFriendView, content: {
+                    VStack{
+                        TextField("", text: $vm.addFriendId)
+                            .padding()
+                            .onSubmit {
+                                Task {
+                                    await vm.send(action: .addFriend)
+                                }
+                            }
+                            .border(Color.secondary, width: 1)
+                    }
+                })
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         Text("친구")
@@ -59,16 +79,16 @@ struct HomeView: View {
                             .font(.title)
                     }
                     
-                    // TODO: - HomeView 상단바
+                    // TODO: - HomeView 상단바 구현
                     ToolbarItem(placement: .topBarTrailing) {
                         HStack{
                             Button {
-                                
+                                container.navigationRouter.push(to: .search(userId: vm.userId))
                             } label: {
                                 Image(systemName: "magnifyingglass")
                             }
                             Button {
-                                
+                                vm.isPresentedAddFriendView.toggle()
                             } label: {
                                 Image(systemName: "person.badge.plus")
                             }
@@ -111,7 +131,7 @@ struct HomeView: View {
             }
             .padding(.horizontal)
             
-            // TODO: - 친구 0명일 때, 추가 방식
+            // TODO: - 친구 0명일 때, 추가 방식 추가
             LazyVStack{
                 ForEach(vm.friends, id: \.self){ friend in
                     Button(action: {
@@ -130,5 +150,10 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView(vm: .init(container: .stub, userId: "loggedInUser"))
+    let container: DIContainer = .stub
+    let user: User = .stubUser
+    let vm: HomeViewModel = .init(container: container, userId: user.id, selectedMainTab: .constant(MainTabType.home))
+    vm.loggedInUser = user
+    
+    return HomeView(vm: vm).environmentObject(container)
 }

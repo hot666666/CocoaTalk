@@ -14,14 +14,20 @@ struct AuthenticationView: View {
     var body: some View {
         switch vm.authenticationState {
         case .authenticated:
-            Text("인증됨")
+            MainTabView()
+                .environmentObject(vm)
+                .environment(\.managedObjectContext, container.searchDataController.persistantContainer.viewContext)
+                .preferredColorScheme(container.appearanceController.appearance.colorScheme)
         case .unauthenticated:
             LoginIntroView()
                 .environmentObject(vm)
+                .preferredColorScheme(container.appearanceController.appearance.colorScheme)
         }
+        
     }
 }
 
 #Preview {
     AuthenticationView(vm: AuthenticationViewModel(container: .stub))
+        .environmentObject(DIContainer.stub)
 }

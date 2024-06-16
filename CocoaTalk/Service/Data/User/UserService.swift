@@ -11,6 +11,11 @@ protocol UserServiceType {
     func loginUser(_ user: User) async throws -> User
     func loadFriends(_ user: User) async throws -> [User]
     func getUser(userId: String) async throws -> User
+    func updateName(userId: String, name: String) async throws
+    func updateDescription(userId: String, description: String) async throws
+    func updateProfileURL(userId: String, urlString: String) async throws
+    func addFriendById(_ userId: String, loggedInUserId: String) async throws
+    func filterUsers(with queryString: String, userId: String) async throws -> [User]
 }
 
 class UserService: UserServiceType {
@@ -18,6 +23,15 @@ class UserService: UserServiceType {
     
     init(dbRepository: UserDBRepositoryType) {
         self.dbRepository = dbRepository
+    }
+    
+    func filterUsers(with queryString: String, userId: String) async throws -> [User] {
+        do {
+            let users = try await dbRepository.filterUsers(with: queryString)
+            return users.map { $0.toModel() }.filter { $0.id != userId }
+        } catch {
+            throw ServiceError.error(error)
+        }
     }
     
     func loginUser(_ user: User) async throws -> User {
@@ -30,6 +44,19 @@ class UserService: UserServiceType {
         } catch {
             throw ServiceError.error(error)
         }
+    }
+    
+    func addFriendById(_ userId: String, loggedInUserId: String) async throws {
+        guard let existingUser = try? await dbRepository.getUser(userId: userId) else {
+            throw DBRepositoryError.notFoundError
+        }
+        
+        do {
+            try await dbRepository.addFriend(existingUser, loggedInUserId: loggedInUserId)
+        } catch {
+            throw DBRepositoryError.addFreindError
+        }
+        
     }
     
     func loadFriends(_ user: User) async throws -> [User] {
@@ -49,9 +76,27 @@ class UserService: UserServiceType {
             throw ServiceError.error(error)
         }
     }
+    
+    func updateName(userId: String, name: String) async throws {
+        try await dbRepository.updateUser(userId: userId, key: "name", value: name)
+    }
+    
+    func updateDescription(userId: String, description: String) async throws {
+        try await dbRepository.updateUser(userId: userId, key: "description", value: description)
+    }
+    
+    func updateProfileURL(userId: String, urlString: String) async throws {
+        try await dbRepository.updateUser(userId: userId, key: "profileURL", value: urlString)
+    }
+    
+    
 }
 
 class StubUserService: UserServiceType {
+    func filterUsers(with queryString: String, userId: String) async throws -> [User] {
+        [.stubUser]
+    }
+    
     func loginUser(_ user: User) async throws -> User {
         .stubUser
     }
@@ -62,5 +107,18 @@ class StubUserService: UserServiceType {
     
     func getUser(userId: String) async throws -> User {
         User(id: userId, name: "이름")
+    }
+    
+    func addFriendById(_ userId: String, loggedInUserId: String) async throws {
+        
+    }
+    
+    func updateName(userId: String, name: String) async throws {
+    }
+    
+    func updateDescription(userId: String, description: String) async throws {
+    }
+    
+    func updateProfileURL(userId: String, urlString: String) async throws {
     }
 }
