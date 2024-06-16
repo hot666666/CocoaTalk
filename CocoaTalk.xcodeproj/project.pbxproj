@@ -22,6 +22,9 @@
 		4501516D2C1D755D001D79FE /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4501516C2C1D7559001D79FE /* HistoryView.swift */; };
 		450151702C1D974C001D79FE /* SearchDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4501516F2C1D9743001D79FE /* SearchDataController.swift */; };
 		450151742C1D97F5001D79FE /* Search.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 450151722C1D97F5001D79FE /* Search.xcdatamodeld */; };
+		450151772C1EC027001D79FE /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450151762C1EC024001D79FE /* MoreView.swift */; };
+		4501517A2C1ED69F001D79FE /* AppearanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450151792C1ED69F001D79FE /* AppearanceController.swift */; };
+		4501517C2C1EDB92001D79FE /* SettingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4501517B2C1EDB8E001D79FE /* SettingItem.swift */; };
 		4595C29E2C1920F7003E5A09 /* ChatRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4595C29D2C1920EF003E5A09 /* ChatRoomView.swift */; };
 		45BF38BF2C08465F000E1EA5 /* CocoaTalkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BF38BE2C08465F000E1EA5 /* CocoaTalkApp.swift */; };
 		45BF38C12C08465F000E1EA5 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BF38C02C08465F000E1EA5 /* AuthenticationView.swift */; };
@@ -98,6 +101,9 @@
 		4501516C2C1D7559001D79FE /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		4501516F2C1D9743001D79FE /* SearchDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataController.swift; sourceTree = "<group>"; };
 		450151732C1D97F5001D79FE /* Search.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Search.xcdatamodel; sourceTree = "<group>"; };
+		450151762C1EC024001D79FE /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
+		450151792C1ED69F001D79FE /* AppearanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceController.swift; sourceTree = "<group>"; };
+		4501517B2C1EDB8E001D79FE /* SettingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingItem.swift; sourceTree = "<group>"; };
 		4595C29D2C1920EF003E5A09 /* ChatRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomView.swift; sourceTree = "<group>"; };
 		45BF38BB2C08465F000E1EA5 /* CocoaTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45BF38BE2C08465F000E1EA5 /* CocoaTalkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocoaTalkApp.swift; sourceTree = "<group>"; };
@@ -209,6 +215,22 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
+		450151752C1EC01E001D79FE /* More */ = {
+			isa = PBXGroup;
+			children = (
+				450151762C1EC024001D79FE /* MoreView.swift */,
+			);
+			path = More;
+			sourceTree = "<group>";
+		};
+		450151782C1ED68F001D79FE /* Appearance */ = {
+			isa = PBXGroup;
+			children = (
+				450151792C1ED69F001D79FE /* AppearanceController.swift */,
+			);
+			path = Appearance;
+			sourceTree = "<group>";
+		};
 		4595C29C2C1920B6003E5A09 /* ChatRoom */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,6 +297,7 @@
 		45BF38CF2C084849000E1EA5 /* Dependency */ = {
 			isa = PBXGroup;
 			children = (
+				450151782C1ED68F001D79FE /* Appearance */,
 				4501516E2C1D973A001D79FE /* Search */,
 				45BF39A12C0FE314000E1EA5 /* Protocol */,
 				45BF399C2C0FE2CA000E1EA5 /* Navigation */,
@@ -286,6 +309,7 @@
 		45BF38D02C084858000E1EA5 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				450151752C1EC01E001D79FE /* More */,
 				450151672C1D11E0001D79FE /* Search */,
 				4595C29C2C1920B6003E5A09 /* ChatRoom */,
 				45BF39992C0FE213000E1EA5 /* ChatList */,
@@ -301,6 +325,7 @@
 		45BF38D12C084875000E1EA5 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				4501517B2C1EDB8E001D79FE /* SettingItem.swift */,
 				45BF39A82C0FF29E000E1EA5 /* Extension */,
 				45BF38D42C0848D0000E1EA5 /* View */,
 				45BF39202C0ABAE2000E1EA5 /* Constant.swift */,
@@ -643,6 +668,7 @@
 				4595C29E2C1920F7003E5A09 /* ChatRoomView.swift in Sources */,
 				45BF39142C0AB4A5000E1EA5 /* DBError.swift in Sources */,
 				45BF396C2C0D4AE5000E1EA5 /* PhotoImage.swift in Sources */,
+				4501517A2C1ED69F001D79FE /* AppearanceController.swift in Sources */,
 				45BF398D2C0E694A000E1EA5 /* DiskStorage.swift in Sources */,
 				45BF397B2C0DBE52000E1EA5 /* UploadProvider.swift in Sources */,
 				45BF39782C0DBDFD000E1EA5 /* UploadSourceType.swift in Sources */,
@@ -657,6 +683,7 @@
 				45BF38CE2C0846F0000E1EA5 /* AppDelegate.swift in Sources */,
 				45BF390C2C09BF23000E1EA5 /* LoadingView.swift in Sources */,
 				45BF398E2C0E694A000E1EA5 /* ImageCacheService.swift in Sources */,
+				450151772C1EC027001D79FE /* MoreView.swift in Sources */,
 				45BF38F12C08541E000E1EA5 /* AuthenticationService.swift in Sources */,
 				45BF39AD2C0FF9C4000E1EA5 /* ChatRoomService.swift in Sources */,
 				45BF39A72C0FE46A000E1EA5 /* ChatRoom.swift in Sources */,
@@ -667,6 +694,7 @@
 				4501515E2C1BD011001D79FE /* ChatData.swift in Sources */,
 				45BF399B2C0FE220000E1EA5 /* ChatListView.swift in Sources */,
 				45BF39AF2C0FFB34000E1EA5 /* ChatRoomDBRepository.swift in Sources */,
+				4501517C2C1EDB92001D79FE /* SettingItem.swift in Sources */,
 				45BF38FE2C086FDD000E1EA5 /* User.swift in Sources */,
 				45BF39912C0E6C61000E1EA5 /* SHA256.swift in Sources */,
 				45BF39A52C0FE378000E1EA5 /* NavigationRoutingView.swift in Sources */,
