@@ -9,11 +9,14 @@ import Foundation
 
 class DIContainer: ObservableObject {
     var services: ServiceType
+    var searchDataController: DataControllable
     var navigationRouter: NavigationRoutable & ObservableObjectSettable
     
     init(services: ServiceType,
+         searchDataController: DataControllable = SearchDataController(),
          navigationRouter: NavigationRoutable & ObservableObjectSettable = NavigationRouter()) {
         self.services = services
+        self.searchDataController = searchDataController
         self.navigationRouter = navigationRouter
         self.navigationRouter.setObjectWillChange(objectWillChange)
     }
