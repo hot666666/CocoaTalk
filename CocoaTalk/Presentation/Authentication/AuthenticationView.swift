@@ -17,10 +17,13 @@ struct AuthenticationView: View {
             MainTabView()
                 .environmentObject(vm)
                 .environment(\.managedObjectContext, container.searchDataController.persistantContainer.viewContext)
+                .preferredColorScheme(container.appearanceController.appearance.colorScheme)
         case .unauthenticated:
             LoginIntroView()
                 .environmentObject(vm)
+                .preferredColorScheme(container.appearanceController.appearance.colorScheme)
         }
+        
     }
 }
 
