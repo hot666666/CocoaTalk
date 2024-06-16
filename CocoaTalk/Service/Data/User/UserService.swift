@@ -15,6 +15,7 @@ protocol UserServiceType {
     func updateDescription(userId: String, description: String) async throws
     func updateProfileURL(userId: String, urlString: String) async throws
     func addFriendById(_ userId: String, loggedInUserId: String) async throws
+    func filterUsers(with queryString: String, userId: String) async throws -> [User]
 }
 
 class UserService: UserServiceType {
@@ -22,6 +23,15 @@ class UserService: UserServiceType {
     
     init(dbRepository: UserDBRepositoryType) {
         self.dbRepository = dbRepository
+    }
+    
+    func filterUsers(with queryString: String, userId: String) async throws -> [User] {
+        do {
+            let users = try await dbRepository.filterUsers(with: queryString)
+            return users.map { $0.toModel() }.filter { $0.id != userId }
+        } catch {
+            throw ServiceError.error(error)
+        }
     }
     
     func loginUser(_ user: User) async throws -> User {
@@ -83,6 +93,10 @@ class UserService: UserServiceType {
 }
 
 class StubUserService: UserServiceType {
+    func filterUsers(with queryString: String, userId: String) async throws -> [User] {
+        [.stubUser]
+    }
+    
     func loginUser(_ user: User) async throws -> User {
         .stubUser
     }
