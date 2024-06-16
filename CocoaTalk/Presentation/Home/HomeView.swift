@@ -83,7 +83,7 @@ struct HomeView: View {
                     ToolbarItem(placement: .topBarTrailing) {
                         HStack{
                             Button {
-                                
+                                container.navigationRouter.push(to: .search(userId: vm.userId))
                             } label: {
                                 Image(systemName: "magnifyingglass")
                             }
