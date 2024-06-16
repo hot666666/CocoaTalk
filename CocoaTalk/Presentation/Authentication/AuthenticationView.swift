@@ -16,6 +16,7 @@ struct AuthenticationView: View {
         case .authenticated:
             MainTabView()
                 .environmentObject(vm)
+                .environment(\.managedObjectContext, container.searchDataController.persistantContainer.viewContext)
         case .unauthenticated:
             LoginIntroView()
                 .environmentObject(vm)
@@ -25,4 +26,5 @@ struct AuthenticationView: View {
 
 #Preview {
     AuthenticationView(vm: AuthenticationViewModel(container: .stub))
+        .environmentObject(DIContainer.stub)
 }
