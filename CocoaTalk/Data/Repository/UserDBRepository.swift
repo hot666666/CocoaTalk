@@ -23,6 +23,7 @@ protocol UserDBRepositoryType {
     func getUser(userId: String) async throws -> UserObject
     func loadFriends(_ object: UserObject) async throws -> [UserObject]
     func addFriend(_ object: UserObject, loggedInUserId: String) async throws
+    func filterUsers(with queryString: String) async throws -> [UserObject]
 }
 
 class UserDBRepository: UserDBRepositoryType {
@@ -34,6 +35,32 @@ class UserDBRepository: UserDBRepositoryType {
         } else {
             return key
         }
+    }
+    
+    func filterUsers(with queryString: String) async throws -> [UserObject] {
+        let path = getPath(key: DBKey.Users, path: nil)
+        let snapshot = try await withCheckedThrowingContinuation { continuation in
+            db.child(path)
+                .queryOrdered(byChild: "name")
+                .queryStarting(atValue: queryString)
+                .queryEnding(atValue: queryString + "\u{f8ff}")
+                .observeSingleEvent(of: .value, with: { snapshot in
+                    if let value = snapshot.value as? [String: Any] {
+                        do {
+                            let data = try JSONSerialization.data(withJSONObject: value)
+                            let userObjects = try JSONDecoder().decode([String: UserObject].self, from: data).map { $0.value }
+                            continuation.resume(returning: userObjects)
+                        } catch {
+                            continuation.resume(throwing: DBError.invalidatedType)
+                        }
+                    } else {
+                        continuation.resume(throwing: DBError.emptyValue)
+                    }
+                }, withCancel: { error in
+                    continuation.resume(throwing: DBError.error(error))
+                })
+        }
+        return snapshot
     }
 
     func updateUser(userId: String, key: String, value: Any) async throws  {

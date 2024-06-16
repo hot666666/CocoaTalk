@@ -17,8 +17,7 @@ struct NavigationRoutingView: View {
             ChatRoomView(vm: .init(container: container, chatRoomId: chatRoomId, userId: userId, otherUserId: otherUserId))
                 .toolbar(.hidden, for:.tabBar)
         case let .search(userId):
-//            SearchView(viewModel: .init(container: container, userId: userId))
-            Text("Search")
+            SearchView(vm: .init(container: container, userId: userId))
         }
     }
 }
